@@ -1,9 +1,8 @@
-import os
+from pathlib import Path
 
-BASE_DIR = './'  # Root of project
 
 # ENV when using standalone uvicorn server running FastAPI
-ENV_PATH = os.path.join(BASE_DIR, 'env/online.env')
+ENV_PATH = Path('../../env/online.env')
 
 
 DESCRIPTION = """
