@@ -1,0 +1,83 @@
+{
+    "sklearn": {
+        "columns": [
+            "id",
+            "prg",
+            "pl",
+            "pr",
+            "sk",
+            "ts",
+            "m11",
+            "bd2",
+            "age",
+            "insurance",
+            "sepsis"
+        ],
+        "environment": [
+            "scikit-learn=1.5.0",
+            "imbalanced-learn=0.12.3"
+        ],
+        "example_input": {
+            "age": [
+                50,
+                31,
+                32
+            ],
+            "bd2": [
+                0.627,
+                0.351,
+                0.672
+            ],
+            "id": [
+                "ICU200010",
+                "ICU200011",
+                "ICU200012"
+            ],
+            "insurance": [
+                0,
+                0,
+                1
+            ],
+            "m11": [
+                33.6,
+                26.6,
+                23.3
+            ],
+            "pl": [
+                148,
+                85,
+                183
+            ],
+            "pr": [
+                72,
+                66,
+                64
+            ],
+            "prg": [
+                6,
+                1,
+                8
+            ],
+            "sepsis": [
+                "Positive",
+                "Negative",
+                "Positive"
+            ],
+            "sk": [
+                35,
+                29,
+                0
+            ],
+            "ts": [
+                0,
+                0,
+                0
+            ]
+        },
+        "model": {
+            "file": "XGBClassifier.joblib"
+        },
+        "model_format": "pickle",
+        "task": "tabular-classification"
+    }
+}
