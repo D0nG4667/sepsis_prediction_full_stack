@@ -42,6 +42,11 @@ services:
       - client:/client
     ports:
       - "8501:8501"
+    env_file:
+      - path: ./env/offline.env
+        required: true
+      - path: ./env/online.env
+        required: false
     depends_on:
       - api
     networks:
