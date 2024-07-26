@@ -9,7 +9,7 @@ from sklearn.preprocessing._label import LabelEncoder
 import httpx
 from io import BytesIO
 
-from typing import Tuple, Optional, Union
+from typing import Tuple, List, Optional, Union
 from enum import Enum
 
 
@@ -28,15 +28,15 @@ class ModelChoice(Enum):
 
 @strawberry.input
 class SepsisFeatures:
-    prg: int
-    pl: int
-    pr: int
-    sk: int
-    ts: int
-    m11: float
-    bd2: float
-    age: int
-    insurance: int
+    prg: List[int]
+    pl: List[int]
+    pr: List[int]
+    sk: List[int]
+    ts: List[int]
+    m11: List[float]
+    bd2: List[float]
+    age: List[int]
+    insurance: List[int]
 
 
 @strawberry.type
@@ -99,21 +99,21 @@ async def pipeline_classifier(pipeline: Pipeline, encoder: LabelEncoder, data: S
                               'execution_code': code, 'error': None})
     try:
         # Create dataframe
-        df = pd.DataFrame([data])
+        df = pd.DataFrame.from_dict(data.__dict__)
+        print(df)
 
         # Make prediction
-        prediction = pipeline.predict(df)
+        preds = pipeline.predict(df)
+        preds_int = [int(pred) for pred in preds]
 
-        pred_int = int(prediction[0])
+        predictions = encoder.inverse_transform(preds_int)
+        probabilities_np = pipeline.predict_proba(df)
 
-        prediction = encoder.inverse_transform([pred_int])[0]
+        probabilities = [round(float(max(prob)*100), 2)
+                         for prob in probabilities_np]
 
-        # Get the probability of the predicted class
-        probability = round(
-            float(pipeline.predict_proba(df)[0][pred_int] * 100), 2)
-
-        result = ResultData(**{"prediction": prediction,
-                               "probability": probability}
+        result = ResultData(**{"prediction": predictions,
+                               "probability": probabilities}
                             )
 
         msg = 'Execution was successful'
@@ -145,7 +145,8 @@ class Query:
         return output
 
 
+# Create the GraphQL Schema
 schema = strawberry.Schema(query=Query)
 
-
+# Create the GraphQL application
 graphql_app = GraphQL(schema)
