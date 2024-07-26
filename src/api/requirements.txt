@@ -117,11 +117,11 @@ python-json-logger==2.0.7
 python-multipart==0.0.9
 pytz==2024.1
 # pywin32==306
-pywinpty==2.0.10
+# pywinpty==2.0.10
 PyYAML==6.0.1
 pyzmq==26.0.3
 redis==5.0.7
-referencing==0.30.2
+# referencing==0.30.2
 requests==2.32.3
 rfc3339-validator==0.1.4
 rfc3986-validator==0.1.1
@@ -166,7 +166,7 @@ websocket-client==1.8.0
 websockets==12.0
 wheel==0.43.0
 widgetsnbextension==4.0.11
-win-inet-pton==1.1.0
+# win-inet-pton==1.1.0
 xgboost==2.0.3
 yarl==1.9.4
 zipp==3.19.2
