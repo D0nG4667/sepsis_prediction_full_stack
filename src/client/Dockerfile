@@ -10,7 +10,7 @@ RUN pip --timeout=3000 install --no-cache-dir --upgrade pip
 RUN pip --timeout=3000 install --no-cache-dir -r requirements.txt
 
 # Make project directory
-RUN mkdir /src/client/
+RUN mkdir -p /src/client/
 
 # Set working directory
 WORKDIR /src/client
