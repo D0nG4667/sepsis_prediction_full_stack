@@ -85,8 +85,8 @@ class Url(BaseModel):
 
 
 class ResultData(BaseModel):
-    prediction: str
-    probability: float
+    prediction: List[str]
+    probability: List[float]
 
 
 class PredictionResponse(BaseModel):

@@ -48,8 +48,8 @@ class Url:
 
 @strawberry.type
 class ResultData:
-    prediction: str
-    probability: float
+    prediction: List[str]
+    probability: List[float]
 
 
 @strawberry.type
