@@ -100,7 +100,6 @@ async def pipeline_classifier(pipeline: Pipeline, encoder: LabelEncoder, data: S
     try:
         # Create dataframe
         df = pd.DataFrame.from_dict(data.__dict__)
-        print(df)
 
         # Make prediction
         preds = pipeline.predict(df)
