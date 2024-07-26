@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI, Query, Form
+from fastapi import FastAPI, Query
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi_cache import FastAPICache
@@ -16,7 +16,7 @@ import logging
 from redis import asyncio as aioredis
 
 from pydantic import BaseModel, Field
-from typing import Tuple, Union, Optional
+from typing import Tuple, List, Union, Optional
 
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing._label import LabelEncoder
@@ -65,16 +65,16 @@ async def favicon():
 # API input features
 
 class SepsisFeatures(BaseModel):
-    prg: int = Field(description="PRG: Plasma glucose")
-    pl: int = Field(description="PL: Blood Work Result-1 (mu U/ml)")
-    pr: int = Field(description="PR: Blood Pressure (mm Hg)")
-    sk: int = Field(description="SK: Blood Work Result-2 (mm)")
-    ts: int = Field(description="TS: Blood Work Result-3 (mu U/ml)")
-    m11: float = Field(
+    prg: List[int] = Field(description="PRG: Plasma glucose")
+    pl: List[int] = Field(description="PL: Blood Work Result-1 (mu U/ml)")
+    pr: List[int] = Field(description="PR: Blood Pressure (mm Hg)")
+    sk: List[int] = Field(description="SK: Blood Work Result-2 (mm)")
+    ts: List[int] = Field(description="TS: Blood Work Result-3 (mu U/ml)")
+    m11: List[float] = Field(
         description="M11: Body mass index (weight in kg/(height in m)^2")
-    bd2: float = Field(description="BD2: Blood Work Result-4 (mu U/ml)")
-    age: int = Field(description="Age: patients age (years)")
-    insurance: int = Field(
+    bd2: List[float] = Field(description="BD2: Blood Work Result-4 (mu U/ml)")
+    age: List[int] = Field(description="Age: patients age (years)")
+    insurance: List[int] = Field(
         description="Insurance: If a patient holds a valid insurance card")
 
 
@@ -146,21 +146,20 @@ async def pipeline_classifier(pipeline: Pipeline, encoder: LabelEncoder, data: S
 
     try:
         # Create dataframe
-        df = pd.DataFrame([data.model_dump()])
+        df = pd.DataFrame.from_dict(data.__dict__)
 
         # Make prediction
-        prediction = pipeline.predict(df)
+        preds = pipeline.predict(df)
+        preds_int = [int(pred) for pred in preds]
 
-        pred_int = int(prediction[0])
+        predictions = encoder.inverse_transform(preds_int)
+        probabilities_np = pipeline.predict_proba(df)
 
-        prediction = encoder.inverse_transform([pred_int])[0]
+        probabilities = [round(float(max(prob)*100), 2)
+                         for prob in probabilities_np]
 
-        # Get the probability of the predicted class
-        probability = round(
-            float(pipeline.predict_proba(df)[0][pred_int] * 100), 2)
-
-        result = ResultData(**{"prediction": prediction,
-                            "probability": probability})
+        result = ResultData(**{"prediction": predictions,
+                            "probability": probabilities})
 
         msg = 'Execution was successful'
         code = 1
