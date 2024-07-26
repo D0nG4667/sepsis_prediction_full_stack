@@ -1,8 +1,6 @@
 import os
 from pathlib import Path
 
-import streamlit as st
-
 # Paths
 BASE_DIR = './'
 DATA = os.path.join(BASE_DIR, 'data/')
