@@ -1,6 +1,7 @@
 # Exclude files not needed for Docker build
-*__pycache__/
+__pycache__/
 **/*__pycache__/
+*.py[cod]
 *.pyc
 *.pyo
 
@@ -12,17 +13,21 @@ logs/*
 *.ipynb_checkpoints/
 
 # Environments
-**/*.env
 .env
-*.env
-env/
 .venv
+env/
 venv/
 ENV/
 env.bak/
 venv.bak/
+**/*.env
 
-# Others
+# Docker
+**/Dockerfile
+**/docker-compose.yml
+.dockerignore
+
+# General files
 .gitkeep
 .gitignore
 **/*.md
