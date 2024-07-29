@@ -43,11 +43,18 @@ The CRoss Industry Standard Process for Data Mining (CRISP-DM).
 
 [FastAPI Image](https://hub.docker.com/r/gabcares/sepsis-fastapi)
 
+#### Demo video
+https://github.com/user-attachments/assets/a260f4c1-bed2-40c8-903f-717fb7474bb1
+
 ### Streamlit frontend application
 
 [client](https://gabcares-sepsis-streamlit.hf.space/)
 
 [Streamlit Image](https://hub.docker.com/r/gabcares/sepsis-streamlit)
+
+#### Demo video
+https://github.com/user-attachments/assets/6489d547-c493-4387-b288-c9217aea67b0
+
 
 ## Technologies Used
 
