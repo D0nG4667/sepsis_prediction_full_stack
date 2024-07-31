@@ -37,14 +37,19 @@ The CRoss Industry Standard Process for Data Mining (CRISP-DM).
 10. **Insurance**: Indicates whether the patient holds a valid insurance card.
 11. **Sepsis**: Target variable indicating whether the patient will develop sepsis (Positive) or (Negative)
 
+### Notebook size too big for GitHub?
+
+- Preview here on Google Collab [sepsis_prediction.ipynb](https://colab.research.google.com/github/D0nG4667/sepsis_prediction_full_stack/blob/main/dev/notebooks/sepsis_prediction.ipynb)
+
 ### FastAPI backend
 
 [API](https://gabcares-sepsis-fastapi.hf.space/docs)
 
 [FastAPI Image](https://hub.docker.com/r/gabcares/sepsis-fastapi)
 
-#### Demo video
-https://github.com/user-attachments/assets/a260f4c1-bed2-40c8-903f-717fb7474bb1
+#### Demo video- FastAPI (RESTFul and GraphQL)
+
+<https://github.com/user-attachments/assets/a260f4c1-bed2-40c8-903f-717fb7474bb1>
 
 ### Streamlit frontend application
 
@@ -52,9 +57,9 @@ https://github.com/user-attachments/assets/a260f4c1-bed2-40c8-903f-717fb7474bb1
 
 [Streamlit Image](https://hub.docker.com/r/gabcares/sepsis-streamlit)
 
-#### Demo video
-https://github.com/user-attachments/assets/6489d547-c493-4387-b288-c9217aea67b0
+#### Demo video- streamlitfrontend
 
+<https://github.com/user-attachments/assets/6489d547-c493-4387-b288-c9217aea67b0>
 
 ## Technologies Used
 
