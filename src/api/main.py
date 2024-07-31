@@ -1,5 +1,3 @@
-from fastapi.responses import RedirectResponse
-
 from graph_ql import graphql_app
 from rest import app
 
